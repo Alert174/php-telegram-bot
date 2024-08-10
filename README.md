@@ -11,7 +11,7 @@
 [![加入 Telegram 机器人支持群组](https://img.shields.io/badge/telegram-@PHP__Telegram__Bot__Support-64659d.svg)](https://telegram.me/PHP_Telegram_Bot_Support)
 [![捐赠](https://img.shields.io/badge/%F0%9F%92%99-Donate%20%2F%20Support%20Us-blue.svg)](#donate)
 
-[![测试](https://github.com/php-telegram-bot/core/actions/workflows/tests.yaml/badge.svg)](https://github.com/php-telegram-bot/core/actions/workflows/tests.yaml)
+[![测试](https://github.com/Alert174/php-telegram-bot/actions/workflows/tests.yaml/badge.svg)](https://github.com/Alert174/php-telegram-bot/actions/workflows/tests.yaml)
 [![代码覆盖率](https://img.shields.io/scrutinizer/coverage/g/php-telegram-bot/core/master.svg?style=flat)](https://scrutinizer-ci.com/g/php-telegram-bot/core/?b=master)
 [![代码质量](https://img.shields.io/scrutinizer/g/php-telegram-bot/core/master.svg?style=flat)](https://scrutinizer-ci.com/g/php-telegram-bot/core/?b=master)
 [![最新稳定版本](https://img.shields.io/packagist/v/longman/telegram-bot.svg)](https://packagist.org/packages/longman/telegram-bot)
@@ -19,7 +19,7 @@
 [![总下载量](https://img.shields.io/packagist/dt/longman/telegram-bot.svg)](https://packagist.org/packages/longman/telegram-bot)
 [![月下载量](https://img.shields.io/packagist/dm/longman/telegram-bot.svg)](https://packagist.org/packages/longman/telegram-bot)
 [![最低 PHP 版本](http://img.shields.io/badge/php-%3E%3D8.1-8892BF.svg)](https://php.net/)
-[![许可证](https://img.shields.io/packagist/l/longman/telegram-bot.svg)](https://github.com/php-telegram-bot/core/LICENSE)
+[![许可证](https://img.shields.io/packagist/l/longman/telegram-bot.svg)](https://github.com/Ale r tphp-telegram-bot/LICENSE)
 
 ## 目录
 - [简介](#简介)
@@ -89,7 +89,7 @@ Telegram 宣布了对 [Bot API](https://telegram.org/blog/bot-revolution) 的官
 
 ---
 
-该代码可在 [GitHub](https://github.com/php-telegram-bot/core) 上找到。欢迎提交拉取请求。
+该代码可在 [GitHub](https://github.com/Alert174/php-telegram-bot) 上找到。欢迎提交拉取请求。
 
 ## 说明
 
@@ -689,17 +689,17 @@ $telegram->setUploadPath('/your/path/Upload');
 [unset.php]: https://github.com/php-telegram-bot/example-bot/blob/master/unset.php "example unset.php"
 [hook.php]: https://github.com/php-telegram-bot/example-bot/blob/master/hook.php "example hook.php"
 [getUpdatesCLI.php]: https://github.com/php-telegram-bot/example-bot/blob/master/getUpdatesCLI.php "example getUpdatesCLI.php"
-[AdminCommands-folder]: https://github.com/php-telegram-bot/core/tree/master/src/Commands/AdminCommands "Admin commands folder"
+[AdminCommands-folder]: https://github.com/Alert174/php-telegram-bot/tree/master/src/Commands/AdminCommands "Admin commands folder"
 [ExampleCommands-folder]: https://github.com/php-telegram-bot/example-bot/blob/master/Commands "Example commands folder"
 [ImageCommand.php]: https://github.com/php-telegram-bot/example-bot/blob/master/Commands/Other/ImageCommand.php "example /image command"
 [WhoamiCommand.php]: https://github.com/php-telegram-bot/example-bot/blob/master/Commands/WhoamiCommand.php "example /whoami command"
 [HelpCommand.php]: https://github.com/php-telegram-bot/example-bot/blob/master/Commands/HelpCommand.php "example /help command"
-[SendtochannelCommand.php]: https://github.com/php-telegram-bot/core/blob/master/src/Commands/AdminCommands/SendtochannelCommand.php "/sendtochannel admin command"
-[DB::selectChats]: https://github.com/php-telegram-bot/core/blob/0.70.0/src/DB.php#L1148 "DB::selectChats() parameters"
-[structure.sql]: https://github.com/php-telegram-bot/core/blob/master/structure.sql "DB structure for importing"
-[Wiki]: https://github.com/php-telegram-bot/core/wiki "PHP Telegram Bot Wiki"
-[wiki-create-your-own-commands]: https://github.com/php-telegram-bot/core/wiki/Create-your-own-commands "Create your own commands"
-[issues]: https://github.com/php-telegram-bot/core/issues "PHP Telegram Bot Issues"
+[SendtochannelCommand.php]: https://github.com/Alert174/php-telegram-bot/blob/master/src/Commands/AdminCommands/SendtochannelCommand.php "/sendtochannel admin command"
+[DB::selectChats]: https://github.com/Alert174/php-telegram-bot/blob/0.70.0/src/DB.php#L1148 "DB::selectChats() parameters"
+[structure.sql]: https://github.com/Alert174/php-telegram-bot/blob/master/structure.sql "DB structure for importing"
+[Wiki]: https://github.com/Alert174/php-telegram-bot/wiki "PHP Telegram Bot Wiki"
+[wiki-create-your-own-commands]: https://github.com/Alert174/php-telegram-bot/wiki/Create-your-own-commands "Create your own commands"
+[issues]: https://github.com/Alert174/php-telegram-bot/issues "PHP Telegram Bot Issues"
 
 [Patreon]: https://www.patreon.com/phptelegrambot "Support us on Patreon"
 [OpenCollective]: https://opencollective.com/php-telegram-bot "Support us on Open Collective"
