@@ -248,10 +248,11 @@ try {
 }
 ```
 
-Open your *set.php* via the browser to register the webhook with Telegram.
-You should see `Webhook was set`.
+通过浏览器打开你的 *set.php* 来向 Telegram 注册 webhook。
+你应该会看到 `Webhook was set`。
 
-Now, create *[hook.php]* with the following contents:
+现在，创建 *[hook.php]*，内容如下：
+
 ```php
 <?php
 // Load composer
@@ -273,22 +274,21 @@ try {
 }
 ```
 
-### Self Signed Certificate
+### 自签名证书
 
-Upload the certificate and add the path as a parameter in *set.php*:
+上传证书并在 *set.php* 中将其路径作为参数添加：
 ```php
 $result = $telegram->setWebhook($hook_url, ['certificate' => '/path/to/certificate']);
 ```
+### 取消 Webhook
 
-### Unset Webhook
+编辑 *[unset.php]*，填写你的机器人凭据并执行它。
 
-Edit *[unset.php]* with your bot credentials and execute it.
+## getUpdates 安装
 
-## getUpdates installation
+为了获得最佳性能，建议为 `getUpdates` 方法启用 MySQL 数据库！
 
-For best performance, the MySQL database should be enabled for the `getUpdates` method!
-
-Create *[getUpdatesCLI.php]* with the following contents:
+创建 *[getUpdatesCLI.php]*，内容如下：
 ```php
 #!/usr/bin/env php
 <?php
@@ -320,31 +320,28 @@ try {
 }
 ```
 
-Next, give the file permission to execute:
+接下来，授予文件权限以执行：
 ```bash
 $ chmod +x getUpdatesCLI.php
 ```
 
-Lastly, run it!
+最后，运行
 ```bash
 $ ./getUpdatesCLI.php
 ```
+### 无数据库的 getUpdates
 
-### getUpdates without database
-
-If you choose to / or are obliged to use the `getUpdates` method without a database, you can replace the `$telegram->enableMySql(...);` line above with:
+如果你选择或必须在没有数据库的情况下使用 `getUpdates` 方法，你可以将上面代码中的 `$telegram->enableMySql(...);` 行替换为：
 ```php
 $telegram->useGetUpdatesWithoutDatabase();
 ```
+## 过滤更新
 
-## Filter Update
+:exclamation: 请注意，默认情况下，Telegram 会发送未来可能添加的任何新更新类型。这可能导致那些没有考虑到这些新类型的命令出现问题！
 
-:exclamation: Note that by default, Telegram will send any new update types that may be added in the future. This may cause commands that don't take this into account to break!
+建议你明确定义你的机器人可以接收和正确处理的更新类型。
 
-It is suggested that you specifically define which update types your bot can receive and handle correctly.
-
-You can define which update types are sent to your bot by defining them when setting the [webhook](#webhook-installation) or passing an array of allowed types when using [getUpdates](#getupdates-installation).
-
+你可以在设置 [webhook](#webhook-installation) 时定义发送到机器人哪些更新类型，或者在使用 [getUpdates](#getupdates-installation) 时传递一个允许的类型数组。
 ```php
 use Longman\TelegramBot\Entities\Update;
 
@@ -365,10 +362,9 @@ $telegram->setWebhook($hook_url, ['allowed_updates' => $allowed_updates]);
 $telegram->handleGetUpdates(['allowed_updates' => $allowed_updates]);
 ```
 
-Alternatively, Update processing can be allowed or denied by defining a custom update filter.
+另外，可以通过定义自定义更新过滤器来允许或拒绝更新处理。
 
-Let's say we only want to allow messages from a user with ID `428`, we can do the following before handling the request:
-
+假设我们只想允许来自具有ID为428的用户的消息，我们可以在处理请求之前执行以下操作：
 ```php
 $telegram->setUpdateFilter(function (Update $update, Telegram $telegram, &$reason = 'Update denied by update_filter') {
     $user_id = $update->getMessage()->getFrom()->getId();
@@ -380,37 +376,33 @@ $telegram->setUpdateFilter(function (Update $update, Telegram $telegram, &$reaso
     return false;
 });
 ```
+拒绝更新的原因可以通过 `$reason` 参数定义。该文本会被写入调试日志。
+## 支持
 
-The reason for denying an update can be defined with the `$reason` parameter. This text gets written to the debug log.
+### 类型
 
-## Support
+所有类型均根据 Telegram API 7.1（2024年2月）实现。
 
-### Types
+### 内联查询
 
-All types are implemented according to Telegram API 7.1 (February 2024).
+完全支持内联查询，符合 Telegram API 7.1（2024年2月）。
 
-### Inline Query
+### 方法
 
-Full support for inline query according to Telegram API 7.1 (February 2024).
+所有方法均根据 Telegram API 7.1（2024年2月）实现。
 
-### Methods
+#### 发送消息
 
-All methods are implemented according to Telegram API 7.1 (February 2024).
-
-#### Send Message
-
-Messages longer than 4096 characters are split up into multiple messages.
-
+超过 4096 个字符的消息将被分成多个消息发送。
 ```php
 $result = Request::sendMessage([
     'chat_id' => $chat_id,
     'text'    => 'Your utf8 text 😜 ...',
 ]);
 ```
+#### 发送照片
 
-#### Send Photo
-
-To send a local photo, add it properly to the `$data` parameter using the file path:
+要发送本地照片，请使用文件路径正确地将其添加到 `$data` 参数中：
 
 ```php
 $result = Request::sendPhoto([
@@ -418,8 +410,7 @@ $result = Request::sendPhoto([
     'photo'   => Request::encodeFile('/path/to/pic.jpg'),
 ]);
 ```
-
-If you know the `file_id` of a previously uploaded file, just use it directly in the data array:
+如果你知道先前上传文件的 `file_id`，只需直接在数据数组中使用它：
 
 ```php
 $result = Request::sendPhoto([
@@ -428,7 +419,7 @@ $result = Request::sendPhoto([
 ]);
 ```
 
-To send a remote photo, use the direct URL instead:
+要发送远程照片，请改用直接URL：
 
 ```php
 $result = Request::sendPhoto([
@@ -436,11 +427,10 @@ $result = Request::sendPhoto([
     'photo'   => 'https://example.com/path/to/pic.jpg',
 ]);
 ```
+*sendAudio*、*sendDocument*、*sendAnimation*、*sendSticker*、*sendVideo*、*sendVoice* 和 *sendVideoNote* 的工作方式都相同，只需查看 [API 文档](https://core.telegram.org/bots/api#sendphoto) 以获取具体的使用方法。
+请参阅 *[ImageCommand.php]* 获取完整示例。
 
-*sendAudio*, *sendDocument*, *sendAnimation*, *sendSticker*, *sendVideo*, *sendVoice* and *sendVideoNote* all work in the same way, just check the [API documentation](https://core.telegram.org/bots/api#sendphoto) for the exact usage.
-See the *[ImageCommand.php]* for a full example.
-
-#### Send Chat Action
+#### 发送聊天动作
 
 ```php
 Request::sendChatAction([
@@ -451,16 +441,16 @@ Request::sendChatAction([
 
 #### getUserProfilePhoto
 
-Retrieve the user photo. (see *[WhoamiCommand.php]* for a full example)
+获取用户照片。（查看 *[WhoamiCommand.php]* 以获取完整示例）
 
-#### getFile and downloadFile
+#### getFile 和 downloadFile
 
-Get the file path and download it. (see *[WhoamiCommand.php]* for a full example)
+获取文件路径并下载文件。（查看 *[WhoamiCommand.php]* 以获取完整示例）
 
-#### Send message to all active chats
+#### 向所有活跃的聊天发送消息
 
-To do this you have to enable the MySQL connection.
-Here's an example of use (check [`DB::selectChats()`][DB::selectChats] for parameter usage):
+要实现此功能，你需要启用 MySQL 连接。
+以下是一个使用示例（查看 [`DB::selectChats()`][DB::selectChats] 了解参数用法）：
 
 ```php
 $results = Request::sendToActiveChats(
@@ -475,13 +465,13 @@ $results = Request::sendToActiveChats(
 );
 ```
 
-You can also broadcast a message to users, from the private chat with your bot. Take a look at the [admin commands](#admin-commands) below.
+你也可以从与你的机器人私聊中向用户广播消息。请查看下面的 [管理员命令](#admin-commands)。
 
-## Utils
+## 实用工具
 
-### MySQL storage (Recommended)
+### MySQL 存储（推荐）
 
-If you want to save messages/users/chats for further usage in commands, create a new database (`utf8mb4_unicode_520_ci`), import *[structure.sql]* and enable MySQL support BEFORE `handle()` method:
+如果你想保存消息/用户/聊天以便在命令中进一步使用，创建一个新的数据库（`utf8mb4_unicode_520_ci`），导入 *[structure.sql]*，并在 `handle()` 方法之前启用 MySQL 支持：
 
 ```php
 $mysql_credentials = [
@@ -495,44 +485,44 @@ $mysql_credentials = [
 $telegram->enableMySql($mysql_credentials);
 ```
 
-You can set a custom prefix to all the tables while you are enabling MySQL:
+在启用MySQL时，您可以为所有表设置自定义前缀：
 
 ```php
 $telegram->enableMySql($mysql_credentials, $bot_username . '_');
 ```
 
-You can also store inline query and chosen inline query data in the database.
+您还可以在数据库中存储内联查询和选择的外线查询数据。
 
-#### External Database connection
+#### 外部数据库连接
 
-It is possible to provide the library with an external MySQL PDO connection.
-Here's how to configure it:
+可以为该库提供一个外部的 MySQL PDO 连接。
+以下是配置方法：
 
 ```php
 $telegram->enableExternalMySql($external_pdo_connection);
 //$telegram->enableExternalMySql($external_pdo_connection, $table_prefix)
 ```
-### Channels Support
+### 频道支持
 
-All methods implemented can be used to manage channels.
-With [admin commands](#admin-commands) you can manage your channels directly with your bot private chat.
+所有已实现的方法都可以用于管理频道。
+通过 [管理员命令](#admin-commands)，你可以直接通过与你的机器人私聊来管理你的频道。
 
-## Commands
+## 命令
 
-### Predefined Commands
+### 预定义命令
 
-The bot is able to recognise commands in a chat with multiple bots (/command@mybot).
+机器人能够在与多个机器人聊天时识别命令（/command@mybot）。
 
-It can also execute commands that get triggered by events, so-called Service Messages.
+它还可以执行由事件触发的命令，即所谓的服务消息。
 
-### Custom Commands
+### 自定义命令
 
-Maybe you would like to develop your own commands.
-There is a guide to help you [create your own commands][wiki-create-your-own-commands].
+你可能想开发自己的命令。
+这里有一份指南可以帮助你[创建自己的命令][wiki-create-your-own-commands]。
 
-Also, be sure to have a look at the [example commands][ExampleCommands-folder] to learn more about custom commands and how they work.
+此外，一定要查看[示例命令][ExampleCommands-folder]，以了解更多关于自定义命令及其工作方式的信息。
 
-You can add your custom commands in different ways:
+你可以通过不同的方式添加自定义命令：
 
 ```php
 // Add a folder that contains command files
@@ -543,10 +533,9 @@ $telegram->addCommandsPath('/path/to/command/files');
 $telegram->addCommandClass(MyCommand::class);
 //$telegram->addCommandClasses([MyCommand::class, MyOtherCommand::class]);
 ```
+### 命令配置
 
-### Commands Configuration
-
-With this method you can set some command specific parameters, for example:
+通过这种方法，你可以设置一些特定命令的参数，例如：
 
 ```php
 // Google geocode/timezone API key for /date command
@@ -559,22 +548,21 @@ $telegram->setCommandConfig('weather', [
     'owm_api_key' => 'your_owm_api_key_here',
 ]);
 ```
+### 管理员命令
 
-### Admin Commands
+启用此功能后，机器人管理员可以执行一些超级用户命令，例如：
+- 列出所有与机器人开始的聊天 */chats*
+- 清理旧的数据库条目 */cleanup*
+- 显示有关机器人的调试信息 */debug*
+- 向所有聊天发送消息 */sendtoall*
+- 向你的频道发布任何内容 */sendtochannel*
+- 使用 */whois* 检查用户或聊天
 
-Enabling this feature, the bot admin can perform some super user commands like:
-- List all the chats started with the bot */chats*
-- Clean up old database entries */cleanup*
-- Show debug information about the bot */debug*
-- Send message to all chats */sendtoall*
-- Post any content to your channels */sendtochannel*
-- Inspect a user or a chat with */whois*
+查看存储在 *[src/Commands/AdminCommands/][AdminCommands-folder]* 文件夹中的所有默认管理员命令。
 
-Take a look at all default admin commands stored in the *[src/Commands/AdminCommands/][AdminCommands-folder]* folder.
+#### 设置管理员
 
-#### Set Admins
-
-You can specify one or more admins with this option:
+你可以使用此选项指定一个或多个管理员：
 
 ```php
 // Single admin
@@ -586,14 +574,15 @@ $telegram->enableAdmins([
     other_telegram_user_id,
 ]);
 ```
-Telegram user id can be retrieved with the *[/whoami][WhoamiCommand.php]* command.
+Telegram 用户 ID 可以通过 *[/whoami][WhoamiCommand.php]* 命令获取。
 
-#### Channel Administration
+#### 频道管理
 
-To enable this feature follow these steps:
-- Add your bot as channel administrator, this can be done with any Telegram client.
-- Enable admin interface for your user as explained in the admin section above.
-- Enter your channel name as a parameter for the *[/sendtochannel][SendtochannelCommand.php]* command:
+要启用此功能，请按照以下步骤操作：
+- 将你的机器人添加为频道管理员，这可以通过任何 Telegram 客户端完成。
+- 按照上面管理部分的说明，为你的用户启用管理员界面。
+- 将你的频道名称作为 *[/sendtochannel][SendtochannelCommand.php]* 命令的参数输入：
+
 ```php
 $telegram->setCommandConfig('sendtochannel', [
     'your_channel' => [
@@ -601,7 +590,7 @@ $telegram->setCommandConfig('sendtochannel', [
     ]
 ]);
 ```
-- If you want to manage more channels:
+- 如果你想管理更多频道：
 ```php
 $telegram->setCommandConfig('sendtochannel', [
     'your_channel' => [
@@ -611,33 +600,33 @@ $telegram->setCommandConfig('sendtochannel', [
     ]
 ]);
 ```
-- Enjoy!
+- 享受吧！
 
-## Upload and Download directory path
+## 上传和下载目录路径
 
-To use the Upload and Download functionality, you need to set the paths with:
+要使用上传和下载功能，你需要设置路径：
 ```php
 $telegram->setDownloadPath('/your/path/Download');
 $telegram->setUploadPath('/your/path/Upload');
 ```
 
-## Documentation
+## 文档
 
-Take a look at the repo [Wiki] for further information and tutorials!
-Feel free to improve!
+查看仓库中的 [Wiki] 以获取更多信息和教程！
+欢迎改进！
 
-## Assets
+## 资源
 
-All project assets can be found in the [assets](https://github.com/php-telegram-bot/assets) repository.
+所有项目资源都可以在 [assets](https://github.com/php-telegram-bot/assets) 仓库中找到。
 
-## Example bot
+## 示例机器人
 
-We're busy working on a full A-Z example bot, to help get you started with this library and to show you how to use all its features.
-You can check the progress of the [示例机器人存储库]).
+我们正在努力创建一个完整的 A-Z 示例机器人，以帮助你开始使用这个库，并展示如何使用其所有功能。
+你可以查看 [示例机器人存储库] 的进展。
 
-## Projects with this library
+## 使用这个库的项目
 
-Here's a list of projects that feats this library, feel free to add yours!
+以下是使用此库的一些项目列表，欢迎添加你的项目！
 - [Inline Games](https://github.com/jacklul/inlinegamesbot) ([@inlinegamesbot](https://telegram.me/inlinegamesbot))
 - [Super-Dice-Roll](https://github.com/RafaelDelboni/Super-Dice-Roll) ([@superdiceroll_bot](https://telegram.me/superdiceroll_bot))
 - [tg-mentioned-bot](https://github.com/gruessung/tg-mentioned-bot)
@@ -645,50 +634,49 @@ Here's a list of projects that feats this library, feel free to add yours!
 - [pass-generator-webbot](https://github.com/OxMohsen/pass-generator-webbot)
 - [Chess Quiz Bot](https://github.com/1int/chess-quiz-bot)
 - [PHP Telegram Bot - Symfony Bundle](https://github.com/m4n50n/telegram_bot_bundle)
+## 疑难解答
 
-## Troubleshooting
+如果你喜欢追求最新版本，请在 [PHP Telegram Bot issues][issues] 页面报告你发现的任何错误。
 
-If you like living on the edge, please report any bugs you find on the [PHP Telegram Bot issues][issues] page.
+## 贡献
 
-## Contributing
+有关更多信息，请参阅 [CONTRIBUTING](CONTRIBUTING.md)。
 
-See [CONTRIBUTING](CONTRIBUTING.md) for more information.
+## 安全
 
-## Security
+有关更多信息，请参阅 [SECURITY](SECURITY.md)。
 
-See [SECURITY](SECURITY.md) for more information.
+## 捐赠
 
-## Donate
+这个机器人项目的所有工作都由我们在空闲时间进行的编程工作组成，目的是为你提供一个易于使用和扩展的 Telegram 机器人库。
+如果你喜欢使用这个库并想表达谢意，捐赠是表示支持的好方法。
 
-All work on this bot consists of many hours of coding during our free time, to provide you with a Telegram Bot library that is easy to use and extend.
-If you enjoy using this library and would like to say thank you, donations are a great way to show your support.
+捐款将被重新投资到项目中 :+1:
 
-Donations are invested back into the project :+1:
-
-Thank you for keeping this project alive :pray:
+感谢你让这个项目得以持续 :pray:
 
 - [![Patreon](https://user-images.githubusercontent.com/9423417/59235980-a5fa6b80-8be3-11e9-8ae7-020bc4ae9baa.png) Patreon.com/phptelegrambot][Patreon]
 - [![OpenCollective](https://user-images.githubusercontent.com/9423417/59235978-a561d500-8be3-11e9-89be-82ec54be1546.png) OpenCollective.com/php-telegram-bot][OpenCollective]
 - [![Ko-fi](https://user-images.githubusercontent.com/9423417/59235976-a561d500-8be3-11e9-911d-b1908c3e6a33.png) Ko-fi.com/phptelegrambot][Ko-fi]
 - [![Tidelift](https://user-images.githubusercontent.com/9423417/59235982-a6930200-8be3-11e9-8ac2-bfb6991d80c5.png) Tidelift.com/longman/telegram-bot][Tidelift]
 - [![Liberapay](https://user-images.githubusercontent.com/9423417/59235977-a561d500-8be3-11e9-9d16-bc3b13d3ceba.png) Liberapay.com/PHP-Telegram-Bot][Liberapay]
-- [![PayPal](https://user-images.githubusercontent.com/9423417/59235981-a5fa6b80-8be3-11e9-9761-15eb7a524cb0.png) PayPal.me/noplanman][PayPal-noplanman] (account of @noplanman)
+- [![PayPal](https://user-images.githubusercontent.com/9423417/59235981-a5fa6b80-8be3-11e9-9761-15eb7a524cb0.png) PayPal.me/noplanman][PayPal-noplanman] (账号 @noplanman)
 - [![Bitcoin](https://user-images.githubusercontent.com/9423417/59235974-a4c93e80-8be3-11e9-9fde-260c821b6eae.png) 166NcyE7nDxkRPWidWtG1rqrNJoD5oYNiV][Bitcoin]
 - [![Ethereum](https://user-images.githubusercontent.com/9423417/59235975-a4c93e80-8be3-11e9-8762-7a47c62c968d.png) 0x485855634fa212b0745375e593fAaf8321A81055][Ethereum]
 
-## For enterprise
+## 企业支持
 
-Available as part of the Tidelift Subscription.
+可作为 Tidelift 订阅的一部分。
 
-The maintainers of `PHP Telegram Bot` and thousands of other packages are working with Tidelift to deliver commercial support and maintenance for the open source dependencies you use to build your applications. Save time, reduce risk, and improve code health, while paying the maintainers of the exact dependencies you use. [Learn more.][Tidelift]
+`PHP Telegram Bot` 的维护者和其他数千个软件包的开发者正在与 Tidelift 合作，为你构建应用程序所使用的开源依赖项提供商业支持和维护。节省时间，降低风险，并改善代码健康状况，同时支付你所使用的确切依赖项的维护者。 [了解更多。][Tidelift]
 
-## License
+## 许可证
 
-Please see the [LICENSE](LICENSE) included in this repository for a full copy of the MIT license, which this project is licensed under.
+请参阅此仓库中包含的 [LICENSE](LICENSE) 以获取 MIT 许可证的完整副本，此项目基于此许可证。
 
-## Credits
+## 致谢
 
-Credit list in [CREDITS](CREDITS)
+致谢名单见 [CREDITS](CREDITS)
 
 ---
 
