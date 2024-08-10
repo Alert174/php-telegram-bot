@@ -22,52 +22,52 @@
 [![许可证](https://img.shields.io/packagist/l/longman/telegram-bot.svg)](https://github.com/php-telegram-bot/core/LICENSE)
 
 ## 目录
-- [简介](#introduction)
-- [说明](#instructions)
-    - [创建你的第一个机器人](#create-your-first-bot)
-    - [使用 Composer 安装此包](#require-this-package-with-composer)
-    - [选择获取 Telegram 更新的方式](#choose-how-to-retrieve-telegram-updates)
-- [使用自定义的 Bot API 服务器](#using-a-custom-bot-api-server)
-- [Webhook 安装](#webhook-installation)
-    - [自签名证书](#self-signed-certificate)
-    - [取消 Webhook](#unset-webhook)
-- [getUpdates 安装](#getupdates-installation)
-    - [无数据库的 getUpdates](#getupdates-without-database)
-- [过滤更新](#filter-update)
-- [支持](#support)
-    - [类型](#types)
-    - [内联查询](#inline-query)
-    - [方法](#methods)
-    - [发送消息](#send-message)
-    - [发送照片](#send-photo)
-    - [发送聊天动作](#send-chat-action)
+- [简介](#简介)
+- [说明](#说明)
+    - [创建你的第一个机器人](#创建你的第一个机器人)
+    - [使用Composer安装此包](#使用 Composer 安装此包)
+    - [选择如何检索Telegram更新](#选择如何检索Telegram更新)
+- [使用自定义机器人API服务器](#使用自定义机器人API服务器)
+- [Webhook 安装](#Webhook 安装)
+    - [自签名证书](#自签名证书)
+    - [取消 Webhook](#取消 Webhook)
+- [getUpdates 安装](#getUpdates 安装)
+    - [无数据库的 getUpdates](#无数据库的 getUpdates)
+- [过滤更新](#过滤更新)
+- [支持](#支持)
+    - [类型](#类型)
+    - [内联查询](#内联查询)
+    - [方法](#方法)
+    - [发送消息](#发送消息)
+    - [发送照片](#发送照片)
+    - [发送聊天动作](#发送聊天动作)
     - [getUserProfilePhoto](#getuserprofilephoto)
-    - [getFile 和 downloadFile](#getfile-and-downloadfile)
-    - [向所有活跃聊天发送消息](#send-message-to-all-active-chats)
-- [实用工具](#utils)
-    - [MySQL 存储 (推荐)](#mysql-storage-recommended)
-        - [外部数据库连接](#external-database-connection)
-    - [频道支持](#channels-support)
-- [命令](#commands)
-    - [预定义命令](#predefined-commands)
-    - [自定义命令](#custom-commands)
-    - [命令配置](#commands-configuration)
-    - [管理员命令](#admin-commands)
-        - [设置管理员](#set-admins)
-        - [频道管理](#channel-administration)
-- [上传和下载目录路径](#upload-and-download-directory-path)
-- [日志记录](doc/01-utils.md)
-- [文档](#documentation)
-- [资源](#assets)
-- [示例机器人](#example-bot)
-- [使用此库的项目](#projects-with-this-library)
-- [故障排除](#troubleshooting)
-- [贡献](#contributing)
-- [安全](#security)
-- [捐赠](#donate)
-- [针对企业](#for-enterprise)
-- [许可证](#license)
-- [致谢](#credits)
+    - [getFile 和 downloadFile](#getFile 和 downloadFile)
+    - [向所有活跃聊天发送消息](#向所有活跃的聊天发送消息)
+- [实用工具](#实用工具)
+    - [MySQL 存储 (推荐)](#MySQL 存储（推荐）)
+        - [外部数据库连接](#外部数据库连接)
+    - [频道支持](#频道支持)
+- [命令](#命令)
+    - [预定义命令](#预定义命令)
+    - [自定义命令](#自定义命令)
+    - [命令配置](#命令配置)
+    - [管理员命令](#管理员命令)
+        - [设置管理员](#设置管理员)
+        - [频道管理](#频道管理)
+- [上传和下载目录路径](#上传和下载目录路径)
+- [日志记录](doc/01-实用工具.md)
+- [文档](#文档)
+- [资源](#资源)
+- [示例机器人](#实例机器人)
+- [使用这个库的项目](#使用这个库的项目)
+- [疑难解答](#疑难解答)
+- [贡献](#贡献)
+- [安全](#安全)
+- [捐赠](#捐赠)
+- [企业支持](#企业支持)
+- [许可证](#许可证)
+- [致谢](#致谢)
 
 ## 简介
 
@@ -77,7 +77,7 @@ Telegram 宣布了对 [Bot API](https://telegram.org/blog/bot-revolution) 的官
 该机器人旨在提供一个平台，让用户可以简单地编写机器人并在几分钟内实现交互。
 
 机器人可以：
-- 使用 [webhook](#webhook-installation) 和 [getUpdates](#getupdates-installation) 方法获取更新。
+- 使用 [webhook](#Webhook 安装) 和 [getUpdates](#getUpdates 安装) 方法获取更新。
 - 支持所有类型和方法，符合 Telegram Bot API 7.1（2024 年 2 月）。
 - 支持超级群组。
 - 处理与其他机器人聊天中的命令。
@@ -190,13 +190,13 @@ composer require longman/telegram-bot
 
 ### 选择如何检索Telegram更新
 
-该机器人可以处理更新 [**Webhook**](#webhook-installation) 或 [**getUpdates**](#getupdates-installation) 方法:
+该机器人可以处理更新 [**Webhook**](#Webhook 安装) 或 [**getUpdates**](#getUpdates 安装) 方法:
 
 |      | Webhook | getUpdates |
 | ---- | :----: | :----: |
 | 描述 | Telegram将更新直接发送给您的主机 | 您必须手动获取Telegram 更新 |
 | 带有HTTPS的主机 | 必需的 | 不需要 |
-| MySQL | 不需要 | ([不](#getupdates-without-database)) 需要  |
+| MySQL | 不需要 | ([不](#无数据库的 getUpdates)) 需要  |
 
 ## 使用自定义机器人API服务器
 
@@ -220,7 +220,7 @@ Longman\TelegramBot\Request::setCustomBotApiUri(
 注意：想要更详细的说明，请访问[示例机器人存储库]并按照那里的指示进行操作。
 
 为了设置 [Webhook][api-setwebhook]，你需要一个支持 HTTPS 和 Composer 的服务器。
-（对于[自签名证书](#self-signed-certificate)，你需要添加一些额外的代码）
+（对于[自签名证书](#自签名证书)，你需要添加一些额外的代码）
 
 创建 *[set.php]*，内容如下：
 
@@ -341,12 +341,12 @@ $telegram->useGetUpdatesWithoutDatabase();
 
 建议你明确定义你的机器人可以接收和正确处理的更新类型。
 
-你可以在设置 [webhook](#webhook-installation) 时定义发送到机器人哪些更新类型，或者在使用 [getUpdates](#getupdates-installation) 时传递一个允许的类型数组。
+你可以在设置 [webhook](#Webhook 安装) 时定义发送到机器人哪些更新类型，或者在使用 [getUpdates](#getUpdates 安装) 时传递一个允许的类型数组。
 ```php
 use Longman\TelegramBot\Entities\Update;
 
 // 对于当前在此库中实现的所有更新类型：
-// $allowed_updates = Update::getUpdateTypes();
+// $allowed_updates = Update::getUpdate类型();
 
 // 手动定义允许更新类型的列表：
 $allowed_updates = [
