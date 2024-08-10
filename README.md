@@ -45,7 +45,7 @@
     - [getFile和downloadFile](#getFile和downloadFile)
     - [向所有活跃聊天发送消息](#向所有活跃的聊天发送消息)
 - [实用工具](#实用工具)
-    - [MySQL 存储 (推荐)](#MySQL存储（推荐）)
+    - [MySQL 存储 (推荐)](#MySQL存储)
         - [外部数据库连接](#外部数据库连接)
     - [频道支持](#频道支持)
 - [命令](#命令)
@@ -469,7 +469,7 @@ $results = Request::sendToActiveChats(
 
 ## 实用工具
 
-### MySQL存储（推荐）
+### MySQL存储
 
 如果你想保存消息/用户/聊天以便在命令中进一步使用，创建一个新的数据库（`utf8mb4_unicode_520_ci`），导入 *[structure.sql]*，并在 `handle()` 方法之前启用 MySQL 支持：
 
