@@ -25,14 +25,14 @@
 - [简介](#简介)
 - [说明](#说明)
     - [创建你的第一个机器人](#创建你的第一个机器人)
-    - [使用Composer安装此包](#使用 Composer 安装此包)
+    - [使用Composer安装此包](#使用Composer安装此包)
     - [选择如何检索Telegram更新](#选择如何检索Telegram更新)
 - [使用自定义机器人API服务器](#使用自定义机器人API服务器)
-- [Webhook 安装](#Webhook 安装)
+- [Webhook安装](#Webhook安装)
     - [自签名证书](#自签名证书)
-    - [取消 Webhook](#取消 Webhook)
-- [getUpdates 安装](#getUpdates 安装)
-    - [无数据库的 getUpdates](#无数据库的 getUpdates)
+    - [取消Webhook](#取消Webhook)
+- [getUpdates安装](#getUpdates安装)
+    - [无数据库的getUpdates](#无数据库的getUpdates)
 - [过滤更新](#过滤更新)
 - [支持](#支持)
     - [类型](#类型)
@@ -42,10 +42,10 @@
     - [发送照片](#发送照片)
     - [发送聊天动作](#发送聊天动作)
     - [getUserProfilePhoto](#getuserprofilephoto)
-    - [getFile 和 downloadFile](#getFile 和 downloadFile)
+    - [getFile和downloadFile](#getFile和downloadFile)
     - [向所有活跃聊天发送消息](#向所有活跃的聊天发送消息)
 - [实用工具](#实用工具)
-    - [MySQL 存储 (推荐)](#MySQL 存储（推荐）)
+    - [MySQL 存储 (推荐)](#MySQL存储（推荐）)
         - [外部数据库连接](#外部数据库连接)
     - [频道支持](#频道支持)
 - [命令](#命令)
@@ -77,7 +77,7 @@ Telegram 宣布了对 [Bot API](https://telegram.org/blog/bot-revolution) 的官
 该机器人旨在提供一个平台，让用户可以简单地编写机器人并在几分钟内实现交互。
 
 机器人可以：
-- 使用 [webhook](#Webhook 安装) 和 [getUpdates](#getUpdates 安装) 方法获取更新。
+- 使用 [webhook](#Webhook安装) 和 [getUpdates](#getUpdates安装) 方法获取更新。
 - 支持所有类型和方法，符合 Telegram Bot API 7.1（2024 年 2 月）。
 - 支持超级群组。
 - 处理与其他机器人聊天中的命令。
@@ -162,7 +162,7 @@ Telegram 宣布了对 [Bot API](https://telegram.org/blog/bot-revolution) 的官
     成功！新状态为：禁用。/help
     ```
 
-### 使用 Composer 安装此包
+### 使用Composer安装此包
 
 通过 [Composer] 安装此包。
 编辑项目的 `composer.json` 文件以要求 `longman/telegram-bot`。
@@ -190,13 +190,13 @@ composer require longman/telegram-bot
 
 ### 选择如何检索Telegram更新
 
-该机器人可以处理更新 [**Webhook**](#Webhook 安装) 或 [**getUpdates**](#getUpdates 安装) 方法:
+该机器人可以处理更新 [**Webhook**](#Webhook安装) 或 [**getUpdates**](#getUpdates安装) 方法:
 
 |      | Webhook | getUpdates |
 | ---- | :----: | :----: |
 | 描述 | Telegram将更新直接发送给您的主机 | 您必须手动获取Telegram 更新 |
 | 带有HTTPS的主机 | 必需的 | 不需要 |
-| MySQL | 不需要 | ([不](#无数据库的 getUpdates)) 需要  |
+| MySQL | 不需要 | ([不](#无数据库的getUpdates)) 需要  |
 
 ## 使用自定义机器人API服务器
 
@@ -215,7 +215,7 @@ Longman\TelegramBot\Request::setCustomBotApiUri(
 
 **注意：** 如果你在 `--local` 模式下运行你的机器人，你不需要使用 `Request::downloadFile()` 方法，因为你可以直接从 `Request::getFile()` 返回的绝对路径访问你的文件。
 
-## Webhook 安装
+## Webhook安装
 
 注意：想要更详细的说明，请访问[示例机器人存储库]并按照那里的指示进行操作。
 
@@ -280,11 +280,11 @@ try {
 ```php
 $result = $telegram->setWebhook($hook_url, ['certificate' => '/path/to/certificate']);
 ```
-### 取消 Webhook
+### 取消Webhook
 
 编辑 *[unset.php]*，填写你的机器人凭据并执行它。
 
-## getUpdates 安装
+## getUpdates安装
 
 为了获得最佳性能，建议为 `getUpdates` 方法启用 MySQL 数据库！
 
@@ -329,7 +329,7 @@ $ chmod +x getUpdatesCLI.php
 ```bash
 $ ./getUpdatesCLI.php
 ```
-### 无数据库的 getUpdates
+### 无数据库的getUpdates
 
 如果你选择或必须在没有数据库的情况下使用 `getUpdates` 方法，你可以将上面代码中的 `$telegram->enableMySql(...);` 行替换为：
 ```php
@@ -341,7 +341,7 @@ $telegram->useGetUpdatesWithoutDatabase();
 
 建议你明确定义你的机器人可以接收和正确处理的更新类型。
 
-你可以在设置 [webhook](#Webhook 安装) 时定义发送到机器人哪些更新类型，或者在使用 [getUpdates](#getUpdates 安装) 时传递一个允许的类型数组。
+你可以在设置 [webhook](#Webhook安装) 时定义发送到机器人哪些更新类型，或者在使用 [getUpdates](#getUpdates安装) 时传递一个允许的类型数组。
 ```php
 use Longman\TelegramBot\Entities\Update;
 
@@ -443,7 +443,7 @@ Request::sendChatAction([
 
 获取用户照片。（查看 *[WhoamiCommand.php]* 以获取完整示例）
 
-#### getFile 和 downloadFile
+#### getFile和downloadFile
 
 获取文件路径并下载文件。（查看 *[WhoamiCommand.php]* 以获取完整示例）
 
@@ -469,7 +469,7 @@ $results = Request::sendToActiveChats(
 
 ## 实用工具
 
-### MySQL 存储（推荐）
+### MySQL存储（推荐）
 
 如果你想保存消息/用户/聊天以便在命令中进一步使用，创建一个新的数据库（`utf8mb4_unicode_520_ci`），导入 *[structure.sql]*，并在 `handle()` 方法之前启用 MySQL 支持：
 
