@@ -190,13 +190,13 @@ composer require longman/telegram-bot
 
 ### 选择如何检索Telegram更新
 
-该机器人可以处理更新 [**Webhook**](#Webhook安装) 或 [**getUpdates**](#getupdates安装) 方法:
+该机器人可以处理更新 [**Webhook**](#webhook-installation) 或 [**getUpdates**](#getupdates-installation) 方法:
 
-||Webhook |getupdates |
-|---- |：-----：|：-----：|
-|描述|电报将更新直接发送给您的主机|您必须手动获取电报更新|
-|主持人https |必需|不需要|
-|mysql |不需要|（[非]（＃getupdates-without-database））必需|
+|      | Webhook | getUpdates |
+| ---- | :----: | :----: |
+| 描述 | 电报将更新直接发送给您的主机 | 您必须手动获取电报更新 |
+| 带有HTTPS的主机 | 必需的 | 不必 |
+| MySQL | 无需 | ([Not](#getupdates-without-database)) Required  |
 
 ## Using a custom Bot API server
 
