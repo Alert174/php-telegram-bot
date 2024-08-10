@@ -195,16 +195,16 @@ composer require longman/telegram-bot
 |      | Webhook | getUpdates |
 | ---- | :----: | :----: |
 | 描述 | 电报将更新直接发送给您的主机 | 您必须手动获取电报更新 |
-| 带有HTTPS的主机 | 必需的 | 不必 |
-| MySQL | 无需 | ([Not](#getupdates-without-database)) Required  |
+| 带有HTTPS的主机 | 必需的 | 不需要 |
+| MySQL | 不需要 | ([不](#getupdates-without-database)) 需要  |
 
-## Using a custom Bot API server
+## 使用自定义机器人API服务器
 
-**For advanced users only!**
+**仅适用于高级用户！**
 
-As from Telegram Bot API 5.0, users can [run their own Bot API server] to handle updates.
-This means, that the PHP Telegram Bot needs to be configured to serve that custom URI.
-Additionally, you can define the URI where uploaded files to the bot can be downloaded (note the `{API_KEY}` placeholder).
+从电报bot API 5.0中，用户可以 [运行他们自己的Bot API 服务器] to handle updates.
+这意味着，需要配置PHP电报机器人以服务于自定义URI。
+此外，您可以在可以下载上传到机器人的文件的情况下定义URI（请注意`{api_key}`占位符）。
 
 ```php
 Longman\TelegramBot\Request::setCustomBotApiUri(
@@ -213,16 +213,17 @@ Longman\TelegramBot\Request::setCustomBotApiUri(
 );
 ```
 
-**Note:** If you are running your bot in `--local` mode, you won't need the `Request::downloadFile()` method, since you can then access your files directly from the absolute path returned by `Request::getFile()`.
+**注意：** 如果你在 `--local` 模式下运行你的机器人，你不需要使用 `Request::downloadFile()` 方法，因为你可以直接从 `Request::getFile()` 返回的绝对路径访问你的文件。
 
-## Webhook installation
+## Webhook 安装
 
-Note: For a more detailed explanation, head over to the [example-bot repository] and follow the instructions there.
+注意：想要更详细的说明，请访问[示例机器人存储库]并按照那里的指示进行操作。
 
-In order to set a [Webhook][api-setwebhook] you need a server with HTTPS and composer support.
-(For a [self signed certificate](#self-signed-certificate) you need to add some extra code)
+为了设置 [Webhook][api-setwebhook]，你需要一个支持 HTTPS 和 Composer 的服务器。
+（对于[自签名证书](#self-signed-certificate)，你需要添加一些额外的代码）
 
-Create *[set.php]* with the following contents:
+创建 *[set.php]*，内容如下：
+
 ```php
 <?php
 // Load composer
@@ -632,7 +633,7 @@ All project assets can be found in the [assets](https://github.com/php-telegram-
 ## Example bot
 
 We're busy working on a full A-Z example bot, to help get you started with this library and to show you how to use all its features.
-You can check the progress of the [example-bot repository]).
+You can check the progress of the [示例机器人存储库]).
 
 ## Projects with this library
 
@@ -693,8 +694,8 @@ Credit list in [CREDITS](CREDITS)
 
 [Telegram Bot API]: https://core.telegram.org/bots/api "Telegram Bot API"
 [Composer]: https://getcomposer.org/ "Composer"
-[run their own Bot API server]: https://core.telegram.org/bots/api#using-a-local-bot-api-server "Using a Local Bot API Server"
-[example-bot repository]: https://github.com/php-telegram-bot/example-bot "Example Bot repository"
+[运行他们自己的Bot API 服务器]: https://core.telegram.org/bots/api#using-a-local-bot-api-server "Using a Local Bot API Server"
+[示例机器人存储库]: https://github.com/php-telegram-bot/example-bot "Example Bot repository"
 [api-setwebhook]: https://core.telegram.org/bots/api#setwebhook "Webhook on Telegram Bot API"
 [set.php]: https://github.com/php-telegram-bot/example-bot/blob/master/set.php "example set.php"
 [unset.php]: https://github.com/php-telegram-bot/example-bot/blob/master/unset.php "example unset.php"
