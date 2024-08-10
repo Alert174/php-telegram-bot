@@ -19,7 +19,7 @@
 [![总下载量](https://img.shields.io/packagist/dt/longman/telegram-bot.svg)](https://packagist.org/packages/longman/telegram-bot)
 [![月下载量](https://img.shields.io/packagist/dm/longman/telegram-bot.svg)](https://packagist.org/packages/longman/telegram-bot)
 [![最低 PHP 版本](http://img.shields.io/badge/php-%3E%3D8.1-8892BF.svg)](https://php.net/)
-[![许可证](https://img.shields.io/packagist/l/longman/telegram-bot.svg)](https://github.com/Ale r tphp-telegram-bot/LICENSE)
+[![许可证](https://img.shields.io/packagist/l/longman/telegram-bot.svg)](https://github.com/php-telegram-bot/core/LICENSE)
 
 ## 目录
 - [简介](#简介)
