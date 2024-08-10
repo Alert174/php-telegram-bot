@@ -1,176 +1,173 @@
 <h1 align="center">
-    PHP Telegram Bot<br>
+    PHP Telegram 机器人<br>
 	<br>
-    <img src="https://raw.githubusercontent.com/php-telegram-bot/assets/master/logo/512px/logo_plain.png" title="PHP Telegram Bot" alt="PHP Telegram Bot logo">
+    <img src="https://raw.githubusercontent.com/php-telegram-bot/assets/master/logo/512px/logo_plain.png" title="PHP Telegram 机器人" alt="PHP Telegram 机器人标志">
 	<br>
 </h1>
 
-A Telegram Bot based on the official [Telegram Bot API]
+一个基于官方 [Telegram 机器人 API] 的 Telegram 机器人
 
-[![API Version](https://img.shields.io/badge/Bot%20API-7.1%20%28February%202024%29-32a2da.svg)](https://core.telegram.org/bots/api-changelog#february-16-2024)
-[![Join the bot support group on Telegram](https://img.shields.io/badge/telegram-@PHP__Telegram__Bot__Support-64659d.svg)](https://telegram.me/PHP_Telegram_Bot_Support)
-[![Donate](https://img.shields.io/badge/%F0%9F%92%99-Donate%20%2F%20Support%20Us-blue.svg)](#donate)
+[![API 版本](https://img.shields.io/badge/Bot%20API-7.1%20%28February%202024%29-32a2da.svg)](https://core.telegram.org/bots/api-changelog#february-16-2024)
+[![加入 Telegram 机器人支持群组](https://img.shields.io/badge/telegram-@PHP__Telegram__Bot__Support-64659d.svg)](https://telegram.me/PHP_Telegram_Bot_Support)
+[![捐赠](https://img.shields.io/badge/%F0%9F%92%99-Donate%20%2F%20Support%20Us-blue.svg)](#donate)
 
-[![Tests](https://github.com/php-telegram-bot/core/actions/workflows/tests.yaml/badge.svg)](https://github.com/php-telegram-bot/core/actions/workflows/tests.yaml)
-[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/php-telegram-bot/core/master.svg?style=flat)](https://scrutinizer-ci.com/g/php-telegram-bot/core/?b=master)
-[![Code Quality](https://img.shields.io/scrutinizer/g/php-telegram-bot/core/master.svg?style=flat)](https://scrutinizer-ci.com/g/php-telegram-bot/core/?b=master)
-[![Latest Stable Version](https://img.shields.io/packagist/v/longman/telegram-bot.svg)](https://packagist.org/packages/longman/telegram-bot)
-[![Dependencies](https://tidelift.com/badges/github/php-telegram-bot/core?style=flat)][Tidelift]
-[![Total Downloads](https://img.shields.io/packagist/dt/longman/telegram-bot.svg)](https://packagist.org/packages/longman/telegram-bot)
-[![Downloads Month](https://img.shields.io/packagist/dm/longman/telegram-bot.svg)](https://packagist.org/packages/longman/telegram-bot)
-[![Minimum PHP Version](http://img.shields.io/badge/php-%3E%3D8.1-8892BF.svg)](https://php.net/)
-[![License](https://img.shields.io/packagist/l/longman/telegram-bot.svg)](https://github.com/php-telegram-bot/core/LICENSE)
+[![测试](https://github.com/php-telegram-bot/core/actions/workflows/tests.yaml/badge.svg)](https://github.com/php-telegram-bot/core/actions/workflows/tests.yaml)
+[![代码覆盖率](https://img.shields.io/scrutinizer/coverage/g/php-telegram-bot/core/master.svg?style=flat)](https://scrutinizer-ci.com/g/php-telegram-bot/core/?b=master)
+[![代码质量](https://img.shields.io/scrutinizer/g/php-telegram-bot/core/master.svg?style=flat)](https://scrutinizer-ci.com/g/php-telegram-bot/core/?b=master)
+[![最新稳定版本](https://img.shields.io/packagist/v/longman/telegram-bot.svg)](https://packagist.org/packages/longman/telegram-bot)
+[![依赖](https://tidelift.com/badges/github/php-telegram-bot/core?style=flat)][Tidelift]
+[![总下载量](https://img.shields.io/packagist/dt/longman/telegram-bot.svg)](https://packagist.org/packages/longman/telegram-bot)
+[![月下载量](https://img.shields.io/packagist/dm/longman/telegram-bot.svg)](https://packagist.org/packages/longman/telegram-bot)
+[![最低 PHP 版本](http://img.shields.io/badge/php-%3E%3D8.1-8892BF.svg)](https://php.net/)
+[![许可证](https://img.shields.io/packagist/l/longman/telegram-bot.svg)](https://github.com/php-telegram-bot/core/LICENSE)
 
-## Table of Contents
-- [Introduction](#introduction)
-- [Instructions](#instructions)
-    - [Create your first bot](#create-your-first-bot)
-    - [Require this package with Composer](#require-this-package-with-composer)
-    - [Choose how to retrieve Telegram updates](#choose-how-to-retrieve-telegram-updates)
-- [Using a custom Bot API server](#using-a-custom-bot-api-server)
-- [Webhook installation](#webhook-installation)
-    - [Self Signed Certificate](#self-signed-certificate)
-    - [Unset Webhook](#unset-webhook)
-- [getUpdates installation](#getupdates-installation)
-    - [getUpdates without database](#getupdates-without-database)
-- [Filter Update](#filter-update)
-- [Support](#support)
-    - [Types](#types)
-    - [Inline Query](#inline-query)
-    - [Methods](#methods)
-    - [Send Message](#send-message)
-    - [Send Photo](#send-photo)
-    - [Send Chat Action](#send-chat-action)
+## 目录
+- [简介](#introduction)
+- [说明](#instructions)
+    - [创建你的第一个机器人](#create-your-first-bot)
+    - [使用 Composer 安装此包](#require-this-package-with-composer)
+    - [选择获取 Telegram 更新的方式](#choose-how-to-retrieve-telegram-updates)
+- [使用自定义的 Bot API 服务器](#using-a-custom-bot-api-server)
+- [Webhook 安装](#webhook-installation)
+    - [自签名证书](#self-signed-certificate)
+    - [取消 Webhook](#unset-webhook)
+- [getUpdates 安装](#getupdates-installation)
+    - [无数据库的 getUpdates](#getupdates-without-database)
+- [过滤更新](#filter-update)
+- [支持](#support)
+    - [类型](#types)
+    - [内联查询](#inline-query)
+    - [方法](#methods)
+    - [发送消息](#send-message)
+    - [发送照片](#send-photo)
+    - [发送聊天动作](#send-chat-action)
     - [getUserProfilePhoto](#getuserprofilephoto)
-    - [getFile and downloadFile](#getfile-and-downloadfile)
-    - [Send message to all active chats](#send-message-to-all-active-chats)
-- [Utils](#utils)
-    - [MySQL storage (Recommended)](#mysql-storage-recommended)
-        - [External Database connection](#external-database-connection)
-    - [Channels Support](#channels-support)
-- [Commands](#commands)
-    - [Predefined Commands](#predefined-commands)
-    - [Custom Commands](#custom-commands)
-    - [Commands Configuration](#commands-configuration)
-    - [Admin Commands](#admin-commands)
-        - [Set Admins](#set-admins)
-        - [Channel Administration](#channel-administration)
-- [Upload and Download directory path](#upload-and-download-directory-path)
-- [Logging](doc/01-utils.md)
-- [Documentation](#documentation)
-- [Assets](#assets)
-- [Example bot](#example-bot)
-- [Projects with this library](#projects-with-this-library)
-- [Troubleshooting](#troubleshooting)
-- [Contributing](#contributing)
-- [Security](#security)
-- [Donate](#donate)
-- [For enterprise](#for-enterprise)
-- [License](#license)
-- [Credits](#credits)
+    - [getFile 和 downloadFile](#getfile-and-downloadfile)
+    - [向所有活跃聊天发送消息](#send-message-to-all-active-chats)
+- [实用工具](#utils)
+    - [MySQL 存储 (推荐)](#mysql-storage-recommended)
+        - [外部数据库连接](#external-database-connection)
+    - [频道支持](#channels-support)
+- [命令](#commands)
+    - [预定义命令](#predefined-commands)
+    - [自定义命令](#custom-commands)
+    - [命令配置](#commands-configuration)
+    - [管理员命令](#admin-commands)
+        - [设置管理员](#set-admins)
+        - [频道管理](#channel-administration)
+- [上传和下载目录路径](#upload-and-download-directory-path)
+- [日志记录](doc/01-utils.md)
+- [文档](#documentation)
+- [资源](#assets)
+- [示例机器人](#example-bot)
+- [使用此库的项目](#projects-with-this-library)
+- [故障排除](#troubleshooting)
+- [贡献](#contributing)
+- [安全](#security)
+- [捐赠](#donate)
+- [针对企业](#for-enterprise)
+- [许可证](#license)
+- [致谢](#credits)
 
-## Introduction
+## 简介
 
-This is a pure PHP Telegram Bot, fully extensible via plugins.
+这是一个纯 PHP 编写的 Telegram 机器人，可以通过插件进行完全扩展。
 
-Telegram announced official support for a [Bot API](https://telegram.org/blog/bot-revolution), allowing integrators of all sorts to bring automated interactions to the mobile platform.
-This Bot aims to provide a platform where one can simply write a bot and have interactions in a matter of minutes.
+Telegram 宣布了对 [Bot API](https://telegram.org/blog/bot-revolution) 的官方支持，使各类集成者可以将自动化交互引入移动平台。
+该机器人旨在提供一个平台，让用户可以简单地编写机器人并在几分钟内实现交互。
 
-The Bot can:
-- Retrieve updates with [webhook](#webhook-installation) and [getUpdates](#getupdates-installation) methods.
-- Supports all types and methods according to Telegram Bot API 7.1 (February 2024).
-- Supports supergroups.
-- Handle commands in chat with other bots.
-- Manage Channel from the bot admin interface.
-- Full support for **inline bots**.
-- Inline keyboard.
-- Messages, InlineQuery and ChosenInlineQuery are stored in the Database.
-- Conversation feature.
+机器人可以：
+- 使用 [webhook](#webhook-installation) 和 [getUpdates](#getupdates-installation) 方法获取更新。
+- 支持所有类型和方法，符合 Telegram Bot API 7.1（2024 年 2 月）。
+- 支持超级群组。
+- 处理与其他机器人聊天中的命令。
+- 从机器人管理员界面管理频道。
+- 完全支持 **内联机器人**。
+- 内联键盘。
+- 消息、InlineQuery 和 ChosenInlineQuery 被存储在数据库中。
+- 会话功能。
 
 ---
 
-This code is available on [GitHub](https://github.com/php-telegram-bot/core). Pull requests are welcome.
+该代码可在 [GitHub](https://github.com/php-telegram-bot/core) 上找到。欢迎提交拉取请求。
 
-## Instructions
+## 说明
 
-### Create your first bot
+### 创建你的第一个机器人
 
-1. Message [`@BotFather`](https://telegram.me/BotFather) with the following text: `/newbot`
+1. 向 [`@BotFather`](https://telegram.me/BotFather) 发送以下文本：`/newbot`
 
-   If you don't know how to message by username, click the search field on your Telegram app and type `@BotFather`, where you should be able to initiate a conversation. Be careful not to send it to the wrong contact, because some users have similar usernames to `BotFather`.
+   如果你不知道如何通过用户名发送消息，点击 Telegram 应用的搜索字段，输入 `@BotFather`，然后你就可以开始对话了。小心不要发给错误的联系人，因为有些用户的用户名与 `BotFather` 类似。
 
-   ![BotFather initial conversation](https://user-images.githubusercontent.com/9423417/60736229-bc2aeb80-9f45-11e9-8d35-5b53145347bc.png)
+   ![BotFather 初始对话](https://user-images.githubusercontent.com/9423417/60736229-bc2aeb80-9f45-11e9-8d35-5b53145347bc.png)
 
-2. `@BotFather` replies with:
-
-    ```
-    Alright, a new bot. How are we going to call it? Please choose a name for your bot.
-    ```
-
-3. Type whatever name you want for your bot.
-
-4. `@BotFather` replies with:
+2. `@BotFather` 回复：
 
     ```
-    Good. Now let's choose a username for your bot. It must end in `bot`. Like this, for example: TetrisBot or tetris_bot.
+    好的，一个新机器人。我们打算怎么称呼它？请为你的机器人选择一个名字。
     ```
 
-5. Type whatever username you want for your bot, minimum 5 characters, and must end with `bot`. For example: `telesample_bot`
+3. 输入你想为机器人起的名字。
 
-6. `@BotFather` replies with:
+4. `@BotFather` 回复：
 
     ```
-    Done! Congratulations on your new bot. You will find it at
-    telegram.me/telesample_bot. You can now add a description, about
-    section and profile picture for your bot, see /help for a list of
-    commands.
+    好。现在我们来为你的机器人选择一个用户名。它必须以 `bot` 结尾。例如：TetrisBot 或 tetris_bot。
+    ```
 
-    Use this token to access the HTTP API:
+5. 输入你想要的用户名，最少 5 个字符，并且必须以 `bot` 结尾。例如：`telesample_bot`
+
+6. `@BotFather` 回复：
+
+    ```
+    完成！恭喜你的新机器人诞生了。你可以在
+    telegram.me/telesample_bot 找到它。你现在可以为你的机器人添加描述、简介和头像，查看 /help 以获取命令列表。
+
+    使用此令牌访问 HTTP API：
     123456789:AAG90e14-0f8-40183D-18491dDE
 
-    For a description of the Bot API, see this page:
+    有关 Bot API 的描述，请参阅此页面：
     https://core.telegram.org/bots/api
     ```
 
-7. Note down the 'token' mentioned above.
+7. 记下上面提到的“令牌”。
 
-*Optionally set the bot privacy:*
+*可选设置机器人隐私：*
 
-1. Send `/setprivacy` to `@BotFather`.
+1. 向 `@BotFather` 发送 `/setprivacy`。
 
-   ![BotFather later conversation](https://user-images.githubusercontent.com/9423417/60736340-26439080-9f46-11e9-970f-8f33bbe39c5f.png)
+   ![BotFather 后续对话](https://user-images.githubusercontent.com/9423417/60736340-26439080-9f46-11e9-970f-8f33bbe39c5f.png)
 
-2. `@BotFather` replies with:
-
-    ```
-    Choose a bot to change group messages settings.
-    ```
-
-3. Type (or select) `@telesample_bot` (change to the username you set at step 5
-above, but start it with `@`)
-
-4. `@BotFather` replies with:
+2. `@BotFather` 回复：
 
     ```
-    'Enable' - your bot will only receive messages that either start with the '/' symbol or mention the bot by username.
-    'Disable' - your bot will receive all messages that people send to groups.
-    Current status is: ENABLED
+    选择一个机器人来更改组消息设置。
     ```
 
-5. Type (or select) `Disable` to let your bot receive all messages sent to a group.
+3. 输入（或选择） `@telesample_bot`（更改为你在步骤 5 中设置的用户名，但以 `@` 开头）
 
-6. `@BotFather` replies with:
+4. `@BotFather` 回复：
 
     ```
-    Success! The new status is: DISABLED. /help
+    “启用” - 你的机器人将只接收以“/”符号开头或通过用户名提到机器人的消息。
+    “禁用” - 你的机器人将接收所有发送到组的消息。
+    当前状态为：启用
     ```
 
-### Require this package with Composer
+5. 输入（或选择）“禁用”以允许你的机器人接收发送到组的所有消息。
 
-Install this package through [Composer].
-Edit your project's `composer.json` file to require `longman/telegram-bot`.
+6. `@BotFather` 回复：
 
-Create *composer.json* file
+    ```
+    成功！新状态为：禁用。/help
+    ```
+
+### 使用 Composer 安装此包
+
+通过 [Composer] 安装此包。
+编辑项目的 `composer.json` 文件以要求 `longman/telegram-bot`。
+
+创建 *composer.json* 文件
 ```json
 {
     "name": "yourproject/yourproject",
@@ -181,25 +178,25 @@ Create *composer.json* file
     }
 }
 ```
-and run `composer update`
+然后运行 `composer update`
 
-**or**
+**或**
 
-run this command in your command line:
+运行以下命令在你的命令行:
 
 ```bash
 composer require longman/telegram-bot
 ```
 
-### Choose how to retrieve Telegram updates
+### 选择如何检索Telegram更新
 
-The bot can handle updates with [**Webhook**](#webhook-installation) or [**getUpdates**](#getupdates-installation) method:
+该机器人可以处理更新 [**Webhook**](#Webhook安装) 或 [**getUpdates**](#getupdates安装) 方法:
 
-|      | Webhook | getUpdates |
-| ---- | :----: | :----: |
-| Description | Telegram sends the updates directly to your host | You have to fetch Telegram updates manually |
-| Host with https | Required | Not required |
-| MySQL | Not required | ([Not](#getupdates-without-database)) Required  |
+||Webhook |getupdates |
+|---- |：-----：|：-----：|
+|描述|电报将更新直接发送给您的主机|您必须手动获取电报更新|
+|主持人https |必需|不需要|
+|mysql |不需要|（[非]（＃getupdates-without-database））必需|
 
 ## Using a custom Bot API server
 
