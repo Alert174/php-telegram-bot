@@ -5,7 +5,8 @@
 	<br>
 </h1>
 
-一个基于官方 [Telegram 机器人 API] 的 Telegram 机器人
+一个基于官方 [Telegram机器人API](https://core.telegram.org/bots/api) 的 Telegram 机器人
+此库翻译自[php-telegram-bot/core](https://github.com/php-telegram-bot/core)
 
 [![API 版本](https://img.shields.io/badge/Bot%20API-7.1%20%28February%202024%29-32a2da.svg)](https://core.telegram.org/bots/api-changelog#february-16-2024)
 [![加入 Telegram 机器人支持群组](https://img.shields.io/badge/telegram-@PHP__Telegram__Bot__Support-64659d.svg)](https://telegram.me/PHP_Telegram_Bot_Support)
