@@ -194,7 +194,7 @@ composer require longman/telegram-bot
 
 |      | Webhook | getUpdates |
 | ---- | :----: | :----: |
-| 描述 | 电报将更新直接发送给您的主机 | 您必须手动获取电报更新 |
+| 描述 | Telegram将更新直接发送给您的主机 | 您必须手动获取Telegram 更新 |
 | 带有HTTPS的主机 | 必需的 | 不需要 |
 | MySQL | 不需要 | ([不](#getupdates-without-database)) 需要  |
 
@@ -202,8 +202,8 @@ composer require longman/telegram-bot
 
 **仅适用于高级用户！**
 
-从电报bot API 5.0中，用户可以 [运行他们自己的Bot API 服务器] to handle updates.
-这意味着，需要配置PHP电报机器人以服务于自定义URI。
+从Telegram bot API 5.0中，用户可以 [运行他们自己的Bot API 服务器] to handle updates.
+这意味着，需要配置PHPTelegram 机器人以服务于自定义URI。
 此外，您可以在可以下载上传到机器人的文件的情况下定义URI（请注意`{api_key}`占位符）。
 
 ```php
@@ -226,24 +226,24 @@ Longman\TelegramBot\Request::setCustomBotApiUri(
 
 ```php
 <?php
-// Load composer
+// 加载 composer
 require __DIR__ . '/vendor/autoload.php';
 
 $bot_api_key  = 'your:bot_api_key';
 $bot_username = 'username_bot';
-$hook_url     = 'https://your-domain/path/to/hook.php';
+$hook_url     = 'https://你的域名/path/to/hook.php';
 
 try {
-    // Create Telegram API object
+    // 创建Telegram API对象
     $telegram = new Longman\TelegramBot\Telegram($bot_api_key, $bot_username);
 
-    // Set webhook
+    // 设置 webhook
     $result = $telegram->setWebhook($hook_url);
     if ($result->isOk()) {
         echo $result->getDescription();
     }
 } catch (Longman\TelegramBot\Exception\TelegramException $e) {
-    // log telegram errors
+    // 日志Telegram 错误
     // echo $e->getMessage();
 }
 ```
@@ -255,21 +255,21 @@ try {
 
 ```php
 <?php
-// Load composer
+// 加载 composer
 require __DIR__ . '/vendor/autoload.php';
 
 $bot_api_key  = 'your:bot_api_key';
 $bot_username = 'username_bot';
 
 try {
-    // Create Telegram API object
+    // 创建Telegram API对象
     $telegram = new Longman\TelegramBot\Telegram($bot_api_key, $bot_username);
 
-    // Handle telegram webhook request
+    // 处理Telegram Webhook请求
     $telegram->handle();
 } catch (Longman\TelegramBot\Exception\TelegramException $e) {
-    // Silence is golden!
-    // log telegram errors
+    // 沉默是金！
+    // 日志Telegram 错误
     // echo $e->getMessage();
 }
 ```
@@ -299,23 +299,23 @@ $bot_username = 'username_bot';
 
 $mysql_credentials = [
    'host'     => 'localhost',
-   'port'     => 3306, // optional
+   'port'     => 3306, // 选填
    'user'     => 'dbuser',
    'password' => 'dbpass',
    'database' => 'dbname',
 ];
 
 try {
-    // Create Telegram API object
+    // 创建Telegram API对象
     $telegram = new Longman\TelegramBot\Telegram($bot_api_key, $bot_username);
 
-    // Enable MySQL
+    // 开启 MySQL
     $telegram->enableMySql($mysql_credentials);
 
-    // Handle telegram getUpdates request
+    // 处理Telegram getupdates请求
     $telegram->handleGetUpdates();
 } catch (Longman\TelegramBot\Exception\TelegramException $e) {
-    // log telegram errors
+    // 日志Telegram 错误
     // echo $e->getMessage();
 }
 ```
@@ -345,20 +345,20 @@ $telegram->useGetUpdatesWithoutDatabase();
 ```php
 use Longman\TelegramBot\Entities\Update;
 
-// For all update types currently implemented in this library:
+// 对于当前在此库中实现的所有更新类型：
 // $allowed_updates = Update::getUpdateTypes();
 
-// Define the list of allowed Update types manually:
+// 手动定义允许更新类型的列表：
 $allowed_updates = [
     Update::TYPE_MESSAGE,
     Update::TYPE_CHANNEL_POST,
     // etc.
 ];
 
-// When setting the webhook.
+// 设置Webhook时
 $telegram->setWebhook($hook_url, ['allowed_updates' => $allowed_updates]);
 
-// When handling the getUpdates method.
+// 处理getupdates方法时
 $telegram->handleGetUpdates(['allowed_updates' => $allowed_updates]);
 ```
 
@@ -454,7 +454,7 @@ Request::sendChatAction([
 
 ```php
 $results = Request::sendToActiveChats(
-    'sendMessage', // Callback function to execute (see Request.php methods)
+    'sendMessage', // 回调函数要执行 (详见 Request.php 方法)
     ['text' => 'Hey! Check out the new features!!'], // Param to evaluate the request
     [
         'groups'      => true,
@@ -476,7 +476,7 @@ $results = Request::sendToActiveChats(
 ```php
 $mysql_credentials = [
    'host'     => 'localhost',
-   'port'     => 3306, // optional
+   'port'     => 3306, // 选填
    'user'     => 'dbuser',
    'password' => 'dbpass',
    'database' => 'dbname',
@@ -525,11 +525,11 @@ $telegram->enableExternalMySql($external_pdo_connection);
 你可以通过不同的方式添加自定义命令：
 
 ```php
-// Add a folder that contains command files
+// 添加一个包含命令文件的文件夹
 $telegram->addCommandsPath('/path/to/command/files');
 //$telegram->addCommandsPaths(['/path/to/command/files', '/another/path']);
 
-// Add a command directly using the class name
+// 使用类名直接添加命令
 $telegram->addCommandClass(MyCommand::class);
 //$telegram->addCommandClasses([MyCommand::class, MyOtherCommand::class]);
 ```
@@ -538,12 +538,12 @@ $telegram->addCommandClass(MyCommand::class);
 通过这种方法，你可以设置一些特定命令的参数，例如：
 
 ```php
-// Google geocode/timezone API key for /date command
+// Google geocode/timezone API key 用于 /date 命令
 $telegram->setCommandConfig('date', [
     'google_api_key' => 'your_google_api_key_here',
 ]);
 
-// OpenWeatherMap API key for /weather command
+// OpenWeatherMap API key 用于 /weather 命令
 $telegram->setCommandConfig('weather', [
     'owm_api_key' => 'your_owm_api_key_here',
 ]);
@@ -565,10 +565,10 @@ $telegram->setCommandConfig('weather', [
 你可以使用此选项指定一个或多个管理员：
 
 ```php
-// Single admin
+// 单个管理员
 $telegram->enableAdmin(your_telegram_user_id);
 
-// Multiple admins
+// 多个管理员
 $telegram->enableAdmins([
     your_telegram_user_id,
     other_telegram_user_id,
